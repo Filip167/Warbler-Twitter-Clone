@@ -244,8 +244,8 @@ def homepage():
                     .order_by(Message.timestamp.desc())
                     .limit(100)
                     .all())
-
-        return render_template('home.html', messages=messages)
+        likes = [msg.id for msg in g.user.likes]
+        return render_template('home.html', messages=messages, likes=likes)
 
     return render_template('home-anon.html')
 
@@ -265,6 +265,7 @@ def add_header(req):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 #deleting and creating db:
